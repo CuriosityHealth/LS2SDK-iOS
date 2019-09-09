@@ -188,6 +188,11 @@ open class LS2RealmDatapoint: Object, LS2Datapoint, LS2DatapointBuilder {
             
         }
     }
+    
+    public func updateBody(body: JSON) {
+        self.configureBody(body: body)
+        self.apSourceCreationDateTime = Date()
+    }
 
     public convenience init?(header: LS2DatapointHeader, body: JSON) {
         self.init()

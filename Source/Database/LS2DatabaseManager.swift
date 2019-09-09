@@ -307,7 +307,7 @@ open class LS2DatabaseManager: NSObject {
     }
     
     var _realmConfig: Realm.Configuration?
-    var realmConfig: Realm.Configuration {
+    public var realmConfig: Realm.Configuration {
         if let config = self._realmConfig {
             return config
         }
