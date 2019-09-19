@@ -39,7 +39,7 @@ open class LS2DatabaseManager: NSObject {
     var syncQueue: DispatchQueue!
     var isSyncing: Bool = false
     
-    open let realmFile: URL
+    public let realmFile: URL
     let encryptionEnabled: Bool
     let fileProtection: FileProtectionType
 //    let realmEncryptionKey: Data?
@@ -87,9 +87,16 @@ open class LS2DatabaseManager: NSObject {
             }
             else {
                 var key = Data(count: 64)
-                _ = key.withUnsafeMutableBytes { bytes in
-                    SecRandomCopyBytes(kSecRandomDefault, 64, bytes)
-                }
+                key.withUnsafeMutableBytes({ (bufferPointer: UnsafeMutableRawBufferPointer) -> Void in
+                    guard let bytes = bufferPointer.baseAddress else {
+                        fatalError("cannot instantiate key")
+                    }
+                    
+                    let response = SecRandomCopyBytes(kSecRandomDefault, 64, bytes)
+                    if (response != 0) {
+                        fatalError("cannot instantiate key")
+                    }
+                })
                 
                 self.credentialStore.set(value: key as NSData, key: LS2DatabaseManager.kDatabaseKey)
             }
