@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'LS2SDK'
-  s.version          = '0.13.0'
+  s.version          = '0.14.0'
   s.summary          = 'A short description of LS2SDK.'
 
 # This description is used to generate tags and improve search results.
@@ -67,7 +67,7 @@ TODO: Add long description of the pod here.
     db.source_files = 'Source/Database/**/*'
     db.dependency 'LS2SDK/Common'
     db.dependency 'LS2SDK/RSRPSupport'
-    db.dependency 'RealmSwift'
+    db.dependency 'RealmSwift', '~> 3'
     db.dependency 'ResearchSuiteResultsProcessor', '~> 0.9'
     db.dependency 'ResearchSuiteExtensions', '~> 0.17'
   end
